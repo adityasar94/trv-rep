@@ -106,11 +106,12 @@
         
         let current = 0;
         function changeHeroImage() {
-            imgElements[current].style.opacity = "0";
+            let next = (current + 1) % imgElements.length;
+            imgElements[next].style.opacity = "1";
             setTimeout(() => {
-                current = (current + 1) % imgElements.length;
-                imgElements[current].style.opacity = "1";
-            }, 500);
+                imgElements[current].style.opacity = "0";
+                current = next;
+            }, 2000); // Delay fade-out until fade-in is halfway
         }
         setInterval(changeHeroImage, 5000);
     </script>
