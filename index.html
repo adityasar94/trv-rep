@@ -8,8 +8,17 @@
         body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
         .navbar { background: black; color: white; padding: 20px; display: flex; justify-content: center; gap: 80px; position: fixed; width: 100%; top: 0; z-index: 1000; font-weight: bold; }
         .navbar a { color: white; text-decoration: none; font-size: 1.2em; font-weight: bold; }
-        .hero { height: 70vh; display: flex; align-items: flex-start; justify-content: center; color: white; text-align: center; position: relative; background-size: cover; background-position: center; transition: background 1s ease-in-out; margin-top: 50px; padding-top: 20px; }
-        .explore { padding: 50px 50px 0; text-align: center; }
+        .hero { height: 70vh; display: flex; align-items: flex-start; justify-content: center; color: white; text-align: center; position: relative; background-size: cover; background-position: center; margin-top: 50px; padding-top: 5px; overflow: hidden; }
+        .hero img { 
+            position: absolute; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            opacity: 0; 
+            transition: opacity 2s ease-in-out; 
+        }
+        .explore { padding: 0px 50px; text-align: center; margin-top: 50px; }
+        .explore h2 { margin-top: 0; }
         .explore-grid { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
@@ -85,13 +94,27 @@
             'images/Switzerland.jpg',
             'images/New York.jpg'
         ];
-        let currentImageIndex = 0;
+        let hero = document.getElementById('hero');
+        let imgElements = [];
+        
+        images.forEach((src, index) => {
+            let img = document.createElement('img');
+            img.src = src;
+            img.style.opacity = index === 0 ? "1" : "0";
+            hero.appendChild(img);
+            imgElements.push(img);
+        });
+        
+        let current = 0;
         function changeHeroImage() {
-            document.getElementById('hero').style.backgroundImage = `url('${images[currentImageIndex]}')`;
-            currentImageIndex = (currentImageIndex + 1) % images.length;
+            let next = (current + 1) % imgElements.length;
+            imgElements[next].style.opacity = "1";
+            setTimeout(() => {
+                imgElements[current].style.opacity = "0";
+                current = next;
+            }, 2000); // Delay fade-out until fade-in is halfway
         }
-        setInterval(changeHeroImage, 5000); // Change image every 5 seconds
-        changeHeroImage(); // Initial load
+        setInterval(changeHeroImage, 5000);
     </script>
 </body>
 </html>
