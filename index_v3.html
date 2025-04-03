@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Explorer</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        .navbar { background: black; color: white; padding: 20px; display: flex; justify-content: center; gap: 80px; position: fixed; width: 100%; top: 0; z-index: 1000; font-weight: bold; }
+        .navbar a { color: white; text-decoration: none; font-size: 1.2em; font-weight: bold; }
+        .hero { height: 60vh; display: flex; align-items: flex-start; justify-content: center; color: white; text-align: center; position: relative; background-size: cover; background-position: center; margin-top: 50px; padding-top: 5px; overflow: hidden; }
+        .hero img { 
+            position: absolute; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            opacity: 0; 
+            transition: opacity 2s ease-in-out; 
+        }
+        .explore { padding: 0px 50px; text-align: center; margin-top: 0px; }
+        .explore h2 { margin-top: 0; }
+        .explore-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            grid-template-rows: repeat(2, 1fr); 
+            gap: 20px; 
+            max-width: 800px; 
+            margin: auto; 
+            padding: 0; 
+        }
+        .explore-box { 
+            background: black; 
+            color: white; 
+            padding: 25px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.5em; 
+            font-weight: bold; 
+            border-radius: 10px; 
+            height: 50px; 
+        }
+        .cta { 
+            text-align: center; 
+            padding: 50px 20px; 
+        }
+        .cta h2 { 
+            margin-bottom: 20px; 
+        }
+        .cta button { 
+            padding: 10px 20px; 
+            font-size: 1.2em; 
+            border: none; 
+            background: black; 
+            color: white; 
+            cursor: pointer; 
+            border-radius: 5px; 
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#">Home</a>
+        <a href="#">Destinations</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+    </nav>
+    <section class="hero" id="hero">
+    </section>
+    <section class="explore">
+        <h2>Find Your Next Adventure</h2>
+        <div class="explore-grid">
+            <div class="explore-box">Asia</div>
+            <div class="explore-box">Europe</div>
+            <div class="explore-box">Australia</div>
+            <div class="explore-box">North America</div>
+            <div class="explore-box">South America</div>
+            <div class="explore-box">Africa</div>
+        </div>
+    </section>
+    <section class="cta">
+        <h2>Join Our Travel Community</h2>
+        <button>Subscribe</button>
+    </section>
+    <footer class="footer">
+        <p>&copy; 2025 Travel Explorer | Contact us | Follow us on social media</p>
+    </footer>
+    <script>
+        const images = [
+            'images/Bali.jpg',
+            'images/Japan.jpg',
+            'images/Australia.jpg',
+            'images/Paris.jpg',
+            'images/Switzerland.jpg',
+            'images/New York.jpg'
+        ];
+        let hero = document.getElementById('hero');
+        let imgElements = [];
+        
+        images.forEach((src, index) => {
+            let img = document.createElement('img');
+            img.src = src;
+            img.style.opacity = index === 0 ? "1" : "0";
+            hero.appendChild(img);
+            imgElements.push(img);
+        });
+        
+        let current = 0;
+        function changeHeroImage() {
+            let next = (current + 1) % imgElements.length;
+            imgElements[next].style.opacity = "1";
+            setTimeout(() => {
+                imgElements[current].style.opacity = "0";
+                current = next;
+            }, 2000); // Delay fade-out until fade-in is halfway
+        }
+        setInterval(changeHeroImage, 5000);
+    </script>
+</body>
+</html>
