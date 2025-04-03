@@ -6,23 +6,49 @@
     <title>Travel Explorer</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        .navbar { background: rgba(0, 0, 0, 0.7); color: white; padding: 15px; display: flex; justify-content: center; gap: 20px; position: fixed; width: 100%; top: 0; z-index: 1000; }
-        .navbar a { color: white; text-decoration: none; font-size: 1.2em; }
-        .hero { height: 70vh; display: flex; align-items: center; justify-content: center; color: white; text-align: center; position: relative; background-size: cover; background-position: center; transition: background 1s ease-in-out; }
-        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); }
+        .navbar { background: black; color: white; padding: 20px; display: flex; justify-content: center; gap: 80px; position: fixed; width: 100%; top: 0; z-index: 1000; font-weight: bold; }
+        .navbar a { color: white; text-decoration: none; font-size: 1.2em; font-weight: bold; }
+        .hero-text-container { text-align: center; padding: 100px 0 30px 0; font-size: 1.5em; font-weight: bold; }
+        .hero { height: 70vh; display: flex; align-items: center; justify-content: center; color: white; text-align: center; position: relative; background-size: cover; background-position: center; transition: background 1s ease-in-out; margin-top: 50px; }
         .hero-content { position: relative; z-index: 1; }
-        .hero h1 { font-size: 3em; margin: 0; }
-        .explore { padding: 50px; text-align: center; }
-        .destinations { display: flex; justify-content: center; gap: 20px; padding: 50px; }
-        .destination { width: 300px; height: 200px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5em; background-size: cover; background-position: center; cursor: pointer; transition: transform 0.3s ease-in-out; }
-        .destination:hover { transform: scale(1.05); }
-        .paris { background: url('paris.jpg') center/cover; }
-        .bali { background: url('bali.jpg') center/cover; }
-        .newyork { background: url('newyork.jpg') center/cover; }
-        .cta { text-align: center; padding: 50px; }
-        .cta button { padding: 10px 20px; font-size: 1.2em; background: #ff6b6b; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background 0.3s; }
-        .cta button:hover { background: #ff4757; }
-        .footer { background: #222; color: white; text-align: center; padding: 20px; font-size: 0.9em; }
+        .explore { padding: 50px 50px 0; text-align: center; }
+        .explore-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            grid-template-rows: repeat(2, 1fr); 
+            gap: 20px; 
+            max-width: 800px; 
+            margin: auto; 
+            padding: 0; 
+        }
+        .explore-box { 
+            background: black; 
+            color: white; 
+            padding: 25px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.5em; 
+            font-weight: bold; 
+            border-radius: 10px; 
+            height: 50px; 
+        }
+        .cta { 
+            text-align: center; 
+            padding: 50px 20px; 
+        }
+        .cta h2 { 
+            margin-bottom: 20px; 
+        }
+        .cta button { 
+            padding: 10px 20px; 
+            font-size: 1.2em; 
+            border: none; 
+            background: black; 
+            color: white; 
+            cursor: pointer; 
+            border-radius: 5px; 
+        }
     </style>
 </head>
 <body>
@@ -32,18 +58,20 @@
         <a href="#">Blog</a>
         <a href="#">Contact</a>
     </nav>
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <h1 id="hero-text">Explore the World with Us</h1>
-        </div>
-    </section>
+    <div class="hero-text-container">
+        Explore the World with Us
+    </div>
+    <section class="hero" id="hero"></section>
     <section class="explore">
         <h2>Find Your Next Adventure</h2>
-    </section>
-    <section class="destinations">
-        <div class="destination paris">Paris</div>
-        <div class="destination bali">Bali</div>
-        <div class="destination newyork">New York</div>
+        <div class="explore-grid">
+            <div class="explore-box">Asia</div>
+            <div class="explore-box">Europe</div>
+            <div class="explore-box">Australia</div>
+            <div class="explore-box">North America</div>
+            <div class="explore-box">South America</div>
+            <div class="explore-box">Africa</div>
+        </div>
     </section>
     <section class="cta">
         <h2>Join Our Travel Community</h2>
@@ -54,17 +82,19 @@
     </footer>
     <script>
         const images = [
-            { src: 'images/Bali.jpg', text: 'Bali' },
-            { src: 'images/Japan.jpg', text: 'Japan' },
-            { src: 'images/Australia.jpg', text: 'Australia' },
+            'images/Bali.jpg',
+            'images/Japan.jpg',
+            'images/Australia.jpg',
+            'images/Paris.jpg',
+            'images/Switzerland.jpg',
+            'images/New York.jpg'
         ];
         let currentImageIndex = 0;
         function changeHeroImage() {
-            document.getElementById('hero').style.backgroundImage = `url('${images[currentImageIndex].src}')`;
-            document.getElementById('hero-text').innerText = images[currentImageIndex].text;
+            document.getElementById('hero').style.backgroundImage = `url('${images[currentImageIndex]}')`;
             currentImageIndex = (currentImageIndex + 1) % images.length;
         }
-        setInterval(changeHeroImage, 5000); // Change image and text every 5 seconds
+        setInterval(changeHeroImage, 5000); // Change image every 5 seconds
         changeHeroImage(); // Initial load
     </script>
 </body>
