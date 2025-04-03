@@ -15,7 +15,7 @@
             height: 100%; 
             object-fit: cover; 
             opacity: 0; 
-            transition: opacity 1s ease-in-out; 
+            transition: opacity 2s ease-in-out; 
         }
         .explore { padding: 50px 50px 0; text-align: center; }
         .explore-grid { 
@@ -107,8 +107,10 @@
         let current = 0;
         function changeHeroImage() {
             imgElements[current].style.opacity = "0";
-            current = (current + 1) % imgElements.length;
-            imgElements[current].style.opacity = "1";
+            setTimeout(() => {
+                current = (current + 1) % imgElements.length;
+                imgElements[current].style.opacity = "1";
+            }, 500);
         }
         setInterval(changeHeroImage, 5000);
     </script>
